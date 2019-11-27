@@ -17,9 +17,9 @@ const port = process.env.PORT || 3000
 //     }
 // })
 
-app.use((req, res, next) => {
-        res.status(503).send('Maintenance, so fuck off')
-})
+// app.use((req, res, next) => {
+//         res.status(503).send('Maintenance, so fuck off')
+// })
 //Automaticly parse json from requests
 app.use(express.json())
 app.use(UserRouter)
