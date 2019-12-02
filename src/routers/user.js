@@ -67,18 +67,7 @@ router.delete('/users/me', auth, async (req,res) => {
     }
 })
 
-router.post('/tasks', async (req, res) => {
-    
-    const task = new Task(req.body)
 
-    try {
-        await task.save()
-        res.status(201).send(task)
-    } catch (e) {
-        res.status(400).send(e)
-        
-    }
-})
 
 router.patch('/users/me', auth, async (req, res) => {
     const updates = Object.keys(req.body) //Return an array of strings

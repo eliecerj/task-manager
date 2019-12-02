@@ -35,13 +35,23 @@ app.listen(port, () => {
 
 const jwt = require('jsonwebtoken')
 
-const equis = async () => {
-    const token = jwt.sign({ _id: 'abc123'}, 'thisismynewcourse', { expiresIn: '1 day'})
-    console.log(token)
+// const equis = async () => {
+//     const token = jwt.sign({ _id: 'abc123'}, 'thisismynewcourse', { expiresIn: '1 day'})
+//     console.log(token)
     
-    const data = jwt.verify(token, 'thisismynewcourse')
-    console.log(data)
+//     const data = jwt.verify(token, 'thisismynewcourse')
+//     console.log(data)
+// }
+//equis()
+
+const main = async () => {
+    // const task = await Task.findById('5de25d7cebb48d035a059aec')
+    // await task.populate('owner').execPopulate()
+    // console.log(task.owner)
+
+    const user = await User.findById('5de25aa58c39af02f1292d30')
+    await user.populate('tasks').execPopulate()
+    console.log(user.tasks)
 }
 
-
-equis()
+main()
