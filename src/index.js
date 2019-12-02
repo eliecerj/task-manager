@@ -44,7 +44,7 @@ const jwt = require('jsonwebtoken')
 // }
 //equis()
 
-const main = async () => {
+/*const main = async () => {
     // const task = await Task.findById('5de25d7cebb48d035a059aec')
     // await task.populate('owner').execPopulate()
     // console.log(task.owner)
@@ -54,4 +54,4 @@ const main = async () => {
     console.log(user.tasks)
 }
 
-main()
+main()*/
