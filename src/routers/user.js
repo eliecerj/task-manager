@@ -1,6 +1,8 @@
 const express = require ('express')
+const multer = require('multer')
 const User = require('../models/user') 
 const auth = require('../middleware/auth') 
+
 const router = new express.Router()
 
 router.post('/users', async (req, res) => {
@@ -69,7 +71,7 @@ router.patch('/users/me', auth, async (req, res) => {
     const updates = Object.keys(req.body) //Return an array of strings
     const allowedUpdates = ['name', 'email', 'password', 'age']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
-
+    
     if(!isValidOperation) return res.status(400).send({ error: 'Invalid Updates'})
 
     try {
@@ -78,18 +80,17 @@ router.patch('/users/me', auth, async (req, res) => {
         updates.forEach((update) => req.user[update] = req.body[update])
         await req.user.save()
 
-
-        // const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true})
-
-        //no user found by id provided
-        // if(!user) {
-        //     return res.status(404).send()
-        // }
         //update went well
         res.send(req.user)
     } catch (e) {
         //Maybe not connection or validation
         res.status(400).send(e)
     }
+})
+
+const upload = multer({ dest: 'avatars' })
+
+router.post('/users/me/avatar', upload.single('avatar'), (req, res) => {
+    res.send()
 })
 module.exports = router
